@@ -1,4 +1,4 @@
-import User from '../modals/User.js';
+import User from '../models/User.js';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 
@@ -37,14 +37,25 @@ export const loginUser = async (req, res) => {
 		if (!user) {
 			return res.json({ sucess: false, message: 'User not found' });
 		}
-       const isMatch = await bcrypt.compare(password,user.password)
-       if(!isMatch){
-        return res.json({ sucess: false, message: 'Invalid credential' });
-       }
-       const token = generateToken(user._id.toString());
+		const isMatch = await bcrypt.compare(password, user.password);
+		if (!isMatch) {
+			return res.json({ sucess: false, message: 'Invalid credential' });
+		}
+		const token = generateToken(user._id.toString());
 		res.json({ sucess: true, token });
 	} catch (error) {
-        console.log(error.message);
+		console.log(error.message);
 		res.json({ success: false, message: error.message });
-    }
+	}
 };
+
+//get user data using token (jwt)
+export const getUserData= async (req,res)=>{
+	try{
+		const {user}=req;
+		res.json({success:true,user})
+	} catch(error){
+		console.log(error.message);
+		res.json({success:false,message:error.message})
+	}
+}
