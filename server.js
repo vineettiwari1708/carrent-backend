@@ -16,7 +16,7 @@ await connectDB();
 //middleware
 app.use(cors());
 app.use(express.json());
-app.get('/', (req, res) => res.send('Server is running, user, owner, image'));
+app.get('/', (req, res) => res.send('Server is running, user, owner, image, api'));
 app.use('/api/user', userRouter)
 app.use('/api/owner', ownerRouter)
 app.use('/api/bookings', bookingRouter)
