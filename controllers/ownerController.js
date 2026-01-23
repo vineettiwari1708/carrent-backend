@@ -1,7 +1,7 @@
 import imagekit from '../configs/imagekit.js';
 import User from '../models/User.js';
 import Car from '../models/Car.js';
-import * as fs from 'node:fs';
+import fs from 'fs';
 
 //api to change role of user
 export const changeRoleToOwner = async (req, res) => {
@@ -29,7 +29,7 @@ export const addCar = async (req, res) => {
 			folder: '/cars',
 		});
 		//for url generation, work for both image and video
-		const optimizedImageUrl = imagekit.url({
+		var optimizedImageUrl = imagekit.url({
 			path: response.filePath,
 			transformation: [
 				{ width: '1280' },  //width size
