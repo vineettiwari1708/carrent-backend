@@ -48,10 +48,10 @@ export const addCar = async (req, res) => {
 };
 
 //api to list of onwer cars
-export const getOwnerCars = async (req, re) => {
+export const getOwnerCars = async (req, res) => {
 	try {
 		const { _id } = req.user;
-		const cars = await Car.find({ owners: _id });
+		const cars = await Car.find({ owner: _id });
 		res.json({ success: true, cars });
 	} catch (error) {
 		console.log(error.message);
@@ -60,7 +60,7 @@ export const getOwnerCars = async (req, re) => {
 };
 
 // api to toggle car avail
-export const toggleCarAvailability = async (req, re) => {
+export const toggleCarAvailability = async (req, res) => {
 	try {
 		const { _id } = req.user;
 		const { carId } = req.body;
@@ -79,7 +79,7 @@ export const toggleCarAvailability = async (req, re) => {
 };
 
 //api to delete a car
-export const deleteCar = async (req, re) => {
+export const deleteCar = async (req, res) => {
 	try {
 		const { _id } = req.user;
 		const { carId } = req.body;
